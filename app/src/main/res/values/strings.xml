@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">BookHUN</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="favourite">Favourite</string>
+    <string name="profile">Profile</string>
+    <string name="aboutapp">About App</string>
+    <string name="navigation_bar">Navigation Bar</string>
+    <string name="open_drawer">open drawer</string>
+    <string name="close_drawer">close drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="dashboard_fragment">Dashboard fragment</string>
+    <string name="favourite_fragment">favourite fragment</string>
+    <string name="profile_fragment">profile fragment</string>
+    <string name="aboutapp_fragment">about app fragment</string>
+    <string name="just_a_list">BookName</string>
+    <string name="_4_5">4.5</string>
+    <string name="name_of_author">Name of author</string>
+    <string name="price">price</string>
+    <string name="internet_connectivity">Internet Connectivity</string>
+    <string name="about_book">About Book</string>
+    <string name="add_to_favourites">Add To Favourites</string>
+    <string name="sample_text">Sample Text</string>
+    <string name="bookname">BookName</string>
+    <string name="authorname">Authorname</string>
+    <string name="book_image">BookImage</string>
+    <string name="search">Search</string>
+</resources>
