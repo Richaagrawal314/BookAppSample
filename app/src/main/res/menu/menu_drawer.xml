@@ -19,11 +19,6 @@
             android:icon="@drawable/ic_aboutapp"
             android:title="@string/aboutapp" />
     </group>
-    <item
-        android:id="@+id/search_icon"
-        android:icon="@drawable/ic_search_24"
-        android:title="@string/search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
+
 
 </menu>
