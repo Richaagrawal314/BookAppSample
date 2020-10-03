@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     dr.closeDrawers()
                 }
 
-                R.id.profile -> {
+                R.id.myLibrary -> {
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.framelayout,
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                         )
                         //.addToBackStack("profile")
                         .commit()
-                    supportActionBar?.title = "Profile "
+                    supportActionBar?.title = "My Library"
 
                     dr.closeDrawers()
                 }
@@ -153,6 +153,8 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.search_menu,menu)
         val manager= getSystemService(Context.SEARCH_SERVICE)as SearchManager
         val searchItem=menu?.findItem(R.id.search_icon)
+
+        //not yet functional
         val searchView = searchItem?.actionView as SearchView
 
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
@@ -167,7 +169,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Toast.makeText(this@MainActivity,"$newText",Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this@MainActivity,"$newText",Toast.LENGTH_SHORT).show()
                 return false
             }
         })

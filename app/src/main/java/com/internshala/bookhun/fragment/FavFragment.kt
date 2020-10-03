@@ -26,38 +26,38 @@ class FavFragment : Fragment() {
     private var progressBar: ProgressBar? = null
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var recyclerAdapter: FavouriteRecyclerAdapter
-    private var dbBookList= listOf<BookEntity>()
+    private var dbBookList = listOf<BookEntity>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view= inflater.inflate(R.layout.fragment_favourite, container, false)
+        val view = inflater.inflate(R.layout.fragment_favourite, container, false)
 
-        recyclerFavourite=view.findViewById(R.id.recyclerFavourite)
-        progressBar=view.findViewById(R.id.progressBarFav)
-        progresslayout=view.findViewById(R.id.progressLayoutFav)
+        recyclerFavourite = view.findViewById(R.id.recyclerFavourite)
+        progressBar = view.findViewById(R.id.progressBarFav)
+        progresslayout = view.findViewById(R.id.progressLayoutFav)
 
-        layoutManager=GridLayoutManager(activity as Context,2)
+        layoutManager = GridLayoutManager(activity as Context, 2)
 
-        dbBookList=RetrieveFav(activity as Context).execute().get()
+        dbBookList = RetrieveFav(activity as Context).execute().get()
 
-        if(activity!=null)
-        {
-            progresslayout.visibility=View.GONE
-            recyclerAdapter= FavouriteRecyclerAdapter(activity as Context,dbBookList)
-            recyclerFavourite.adapter=recyclerAdapter
-            recyclerFavourite.layoutManager=layoutManager
+        if (activity != null) {
+            progresslayout.visibility = View.GONE
+            recyclerAdapter = FavouriteRecyclerAdapter(activity as Context, dbBookList)
+            recyclerFavourite.adapter = recyclerAdapter
+            recyclerFavourite.layoutManager = layoutManager
         }
 
         return view
     }
 
 }
-class RetrieveFav(val context: Context): AsyncTask<Void, Void, List<BookEntity>>() {
+
+class RetrieveFav(val context: Context) : AsyncTask<Void, Void, List<BookEntity>>() {
     override fun doInBackground(vararg params: Void?): List<BookEntity> {
-        val db= Room.databaseBuilder(context,BDatabase::class.java,"books-db")
+        val db = Room.databaseBuilder(context, BDatabase::class.java, "books-db")
             .build()
         return db.bookDao().getAllBooks()
     }

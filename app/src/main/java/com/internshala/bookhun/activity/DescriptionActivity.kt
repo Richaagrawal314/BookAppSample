@@ -39,7 +39,6 @@ class DescriptionActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description_activity)
-
         txtBookName = findViewById(R.id.txtdescbookname)
         txtBookauthor = findViewById(R.id.txtdescauthorname)
         txtBookPrice = findViewById(R.id.txtdescbookprice)
@@ -57,20 +56,20 @@ class DescriptionActivity
             mbookinput = intent.getStringExtra("bookName")
         } else {
             finish()
-            Toast.makeText(this@DescriptionActivity, "some error occured", Toast.LENGTH_SHORT)
+            Toast.makeText(this@DescriptionActivity, "Some Error Occurred", Toast.LENGTH_SHORT)
                 .show()
         }
 
         if (mbookinput == "sampletext") {
             finish()
-            Toast.makeText(this@DescriptionActivity, "some error occured", Toast.LENGTH_SHORT)
+            Toast.makeText(this@DescriptionActivity, "Some Error Occurred", Toast.LENGTH_SHORT)
                 .show()
         }
 
 
         val queryString = mbookinput.toString()
 
-        Log.i(tAG, "click Listener :$queryString")
+        //Log.i(tAG, "click Listener :$queryString")
         val url = "https://www.googleapis.com/books/v1/volumes?q={$queryString}&maxResults=1"
 
 
@@ -91,20 +90,36 @@ class DescriptionActivity
                     bookId = book.getString("id")
                     try {
                         txtBookName.text = volumeInfo.getString("title")
-                        txtBookauthor.text = volumeInfo.getString("authors")
-                        txtBookDescription.text = volumeInfo.getString("description")
-                        Log.i(tAG, "title is: ${txtBookName.text}")
-                        Log.i(tAG, "author is: ${txtBookauthor.text}")
-                        Log.i(tAG, "description is: ${txtBookDescription.text}")
+
+                        if (volumeInfo.has("authors")) {
+                            val authorArray = volumeInfo.getJSONArray("authors")
+                            txtBookauthor.text = authorArray[0].toString()
+                        } else
+                            txtBookauthor.text = "Author Not Known"
+
+                        if (volumeInfo.has("description"))
+                            txtBookDescription.text = volumeInfo.getString("description")
+                        else
+                            txtBookDescription.text = "Description Not Found"
+
+                        val price = book.getJSONObject("saleInfo")
+                        txtBookPrice.text = if (price.getString("saleability") == "FOR_SALE") {
+                            price.getJSONObject("listPrice").getDouble("amount").toString() +
+                                    price.getJSONObject("listPrice").getString("currencyCode")
+                        } else
+                            "Not for Sale"
+                        if (volumeInfo.has("imageLinks"))
+                            imgurl = volumeInfo.getJSONObject("imageLinks")
+                                .getString("thumbnail")
+
                     } catch (e: Exception) {
                         Log.e(tAG, "json-parse exception is: ${e.message}")
                         // e.printStackTrace()
                     }
-                    imgurl = volumeInfo.getJSONObject("imageLinks")
-                        .getString("thumbnail")
-                    Log.i(tAG, "image link $imgurl ")
+
+
                     Picasso.get().load(imgurl).placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_profile)
                         .into(imgBookDesc, object : Callback {
                             override fun onSuccess() {
                                 Log.i(tAG, "on success callback")
@@ -131,9 +146,9 @@ class DescriptionActivity
                     btnAddToFav.setBackgroundColor(favColor)
                 } else {
                     btnAddToFav.text = "Add to Favourites"
-                    val nofavColor =
+                    val noFavColor =
                         ContextCompat.getColor(applicationContext, R.color.colorPrimary)
-                    btnAddToFav.setBackgroundColor(nofavColor)
+                    btnAddToFav.setBackgroundColor(noFavColor)
                 }
 
                 btnAddToFav.setOnClickListener {
@@ -163,9 +178,9 @@ class DescriptionActivity
                                 Toast.LENGTH_SHORT
                             ).show()
                             btnAddToFav.text = "Add to Favourites"
-                            val nofavColor =
+                            val noFavColor =
                                 ContextCompat.getColor(applicationContext, R.color.colorPrimary)
-                            btnAddToFav.setBackgroundColor(nofavColor)
+                            btnAddToFav.setBackgroundColor(noFavColor)
                         } else {
                             Log.i(tAG, "Error in Addtofav")
                             /*Toast.makeText(applicationContext,

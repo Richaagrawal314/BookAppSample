@@ -2,28 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.DescriptionActivity">
+    android:layout_height="match_parent">
 
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:background="@color/colorPrimary"
-        android:padding="5dp"/>
+        android:minHeight="?attr/actionBarSize"
+        android:padding="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
 
     <ScrollView
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="?attr/actionBarSize">
 
         <RelativeLayout
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
             <LinearLayout
                 android:id="@+id/llContent"
@@ -38,8 +38,9 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1.7"
-                    android:src="@mipmap/ic_launcher"
-                    android:padding="5dp" />
+                    android:contentDescription="@string/bookcover"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_launcher" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -49,38 +50,39 @@
                     <TextView
                         android:id="@+id/txtdescbookname"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_height="54dp"
                         android:layout_marginStart="10dp"
-                        android:text="@string/bookname"
+                        android:autoSizeMaxTextSize="24dp"
+                        android:autoSizeMinTextSize="16dp"
+                        android:autoSizeTextType="uniform"
+                        android:ellipsize="marquee"
+                        android:padding="5dp"
                         android:textColor="#000000"
-                        android:textSize="25sp"
                         android:textStyle="bold"
+                        tools:targetApi="o"
 
-                        />
+                        tools:text="@string/bookname" />
 
                     <TextView
                         android:id="@+id/txtdescauthorname"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="53dp"
                         android:layout_below="@+id/txtdescbookname"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="23dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/authorname"
+                        android:padding="5dp"
                         android:textColor="#574D4D"
-                        android:textSize="23sp" />
+                        android:textSize="14sp"
+                        tools:text="@string/authorname" />
 
                     <TextView
                         android:id="@+id/txtdescbookprice"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="53dp"
                         android:layout_below="@id/txtdescauthorname"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/price"
-                        android:textSize="20sp" />
+                        android:padding="5dp"
+                        android:textSize="14sp"
+                        tools:text="@string/price" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -101,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtDescAbout"
                 android:layout_margin="10dp"
+                android:paddingBottom="5dp"
                 android:text="@string/sample_text"
                 android:textColor="#4E4A4A"
                 android:textSize="15sp" />
@@ -112,24 +115,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-
         android:background="#ffffff">
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
 
     <Button
         android:id="@+id/btnFavouriteDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:text="@string/add_to_favourites"
+        android:layout_toEndOf="@id/view"
         android:background="@color/colorPrimary"
+        android:text="@string/add_to_favourites"
         android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnAddToLibrary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/view"
+        android:background="@color/colorPrimary"
+        android:text="@string/add_to_library"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
 </RelativeLayout>
