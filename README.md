@@ -1,6 +1,6 @@
 # BookAppSample
-This is a Kotlin based Sample E-book App,(My first noteworthy app).
-The details are fetched from google books Api. 
+This is a Kotlin based Sample E-book App(My first noteworthy app).
+The details are fetched from google books API. 
 Initially the data for homepage(here, Dashboard) was static but now it is fechted from google books API.
 Uses Volley for Internet Requests, Room for Database for a fragment section.
 Right Now it is pretty basic but I'm working on adding features. 
