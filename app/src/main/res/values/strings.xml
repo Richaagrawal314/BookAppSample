@@ -2,7 +2,7 @@
     <string name="app_name">BookHUN</string>
     <string name="dashboard">Dashboard</string>
     <string name="favourite">Favourite</string>
-    <string name="profile">Profile</string>
+    <string name="mylibrary">My Library</string>
     <string name="aboutapp">About App</string>
     <string name="navigation_bar">Navigation Bar</string>
     <string name="open_drawer">open drawer</string>
@@ -14,7 +14,7 @@
     <string name="profile_fragment">profile fragment</string>
     <string name="aboutapp_fragment">about app fragment</string>
     <string name="just_a_list">BookName</string>
-    <string name="_4_5">4.5</string>
+    <string name="rating">_</string>
     <string name="name_of_author">Name of author</string>
     <string name="price">price</string>
     <string name="internet_connectivity">Internet Connectivity</string>
@@ -25,4 +25,6 @@
     <string name="authorname">Authorname</string>
     <string name="book_image">BookImage</string>
     <string name="search">Search</string>
+    <string name="add_to_library">Add to Library</string>
+    <string name="bookcover">BookCover</string>
 </resources>

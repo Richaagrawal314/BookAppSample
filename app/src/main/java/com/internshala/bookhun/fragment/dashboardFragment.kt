@@ -1,62 +1,47 @@
 package com.internshala.bookhun.fragment
 
 import android.app.AlertDialog
-import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.internshala.bookhun.R
 import com.internshala.bookhun.adapter.DashboardRecyclerAdapter
 import com.internshala.bookhun.model.DataBook
 import com.internshala.bookhun.util.ConnectionManager
+import org.json.JSONObject
 
 class DashboardFragment : Fragment() {
     private lateinit var recyclerdash: RecyclerView
     private lateinit var layoutlinear: RecyclerView.LayoutManager
     private lateinit var checkbtn: Button
     private lateinit var recycleadapter: DashboardRecyclerAdapter
+    private lateinit var progressLayout: RelativeLayout
+    // private lateinit var progressBar: ProgressBar
 
-    private val bookInfoList = arrayListOf(
-        DataBook(
-            "War and Peace",
-            "Someone I don't know. but I will find out about him. you chill",
-            "550",
-            "4.8",
-            R.drawable.chrysanthemum
-        ),
-        DataBook(
-            "Crime and Punishment ", "another language", "452", "2.5", R.drawable.desert
-        ),
-        DataBook(
-            "God of Small Things", "Arundhoti Roy", "256", "4.8", R.drawable.hydrangeas
-        ),
-        DataBook(
-            "A Thousand Splendid Dreams", "Khaled Hosseini", "ffdvf",
-            "fgvgv", R.drawable.jellyfish
-        ),
-        DataBook(
-            "Lolita", "Vladmir something", "566",
-            "212", R.drawable.koala
-        ),
-        DataBook(
-            "The Mountains Echoed", "khaled hosseini",
-            "ffdvf", "long-", R.drawable.lighthouse
-        ),
-        DataBook(
-            "White Tiger", "Arvind Adiga", "212",
-            "65", R.drawable.penguins
-        ),
-        DataBook(
-            "Mafia Queens", "S. Hussain Zaidi", "121",
-            "212", R.drawable.tulips
-        )
 
-    )
+    /*  private val bookInfoList = arrayListOf(
+          DataBook(
+              "A Thousand Splendid Dreams", "Khaled Hosseini", "ffdvf",
+              "fgvgv", R.drawable.jellyfish
+          ),
+          DataBook(
+              "Lolita", "Vladmir something", "566",
+              "212", R.drawable.koala
+          ),
+      and 10 more {Initially this data was passed to adapter and displayed.}
+      )*/
 
 
     override fun onCreateView(
@@ -67,6 +52,10 @@ class DashboardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         recyclerdash = view.findViewById((R.id.recyclerdash))
         checkbtn = view.findViewById(R.id.btncheckinternet)
+        progressLayout = view.findViewById(R.id.dasProgressLayout)
+        progressLayout.visibility = View.VISIBLE
+        // progressBar = findViewById(R.id.progressBar)
+        // progressBar.visibility = View.VISIBLE
 
         checkbtn.setOnClickListener {
             if (ConnectionManager().checkConnectivity(activity as Context)) {
@@ -81,26 +70,93 @@ class DashboardFragment : Fragment() {
                 val dialog = AlertDialog.Builder(activity as Context)
                 dialog.setTitle("Success")
                 dialog.setMessage("Internet Connection Not Found")
-                dialog.setPositiveButton("Ok") { text, listener -> }
-                dialog.setNegativeButton("Cancel") { text, listener -> }
+                dialog.setPositiveButton("Ok") { _, _ -> }
+                dialog.setNegativeButton("Cancel") { _, _ -> }
                 dialog.create()
                 dialog.show()
             }
         }
 
         layoutlinear = LinearLayoutManager(activity)
-        recycleadapter = DashboardRecyclerAdapter(activity as Context, bookInfoList)
-
         recyclerdash.layoutManager = layoutlinear
-        recyclerdash.adapter = recycleadapter
-        /*recyclerdash.addItemDecoration(
-            DividerItemDecoration(
-                recyclerdash.context,
-                (layoutlinear as LinearLayoutManager).orientation
-            )*/
-        //)
+        getLatestBooks()
         return view
     }
+
+    private fun getLatestBooks() {
+        val bookList = arrayListOf<DataBook>()
+        //set queryString to whatever type books you want on your Dashboard
+        val queryString = "best sellers books recent"
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+        val url =
+            "https://www.googleapis.com/books/v1/volumes?q={$queryString}&maxResults=40&printType=books"
+        var title = ""
+        var authors = ""
+        var imgurl = ""
+        var listPrice = ""
+        var rating = ""
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            {
+                //  Log.i("TAG", "response $it")
+                val jsonObj = JSONObject(it)
+                val itemArray = jsonObj.getJSONArray("items")
+                progressLayout.visibility = View.GONE
+
+                for (i in 0 until itemArray.length()) {
+                    val book = itemArray.getJSONObject(i)
+                    val volumeInfo = book.getJSONObject("volumeInfo")
+                    try {
+                        title = volumeInfo.getString("title")
+                        authors = if (volumeInfo.has("authors")) {
+                            val authorArray = volumeInfo.getJSONArray("authors")
+                            authorArray[0].toString()
+                        } else
+                            "Author Not Known"
+
+
+                        val price = book.getJSONObject("saleInfo")
+                        listPrice = if (price.getString("saleability") == "FOR_SALE") {
+                            price.getJSONObject("listPrice").getDouble("amount").toString() +
+                                    price.getJSONObject("listPrice").getString("currencyCode")
+                        } else
+                            "Not for Sale"
+                        //average rating is not available on most books, so I changed it to mature rating.
+                        //will think something else later
+                        rating = if (volumeInfo.getString("maturityRating") == "NOT_MATURE")
+                            " _ "
+                        else
+                            "18+"
+
+                        imgurl = volumeInfo.getJSONObject("imageLinks")
+                            .getString("thumbnail")
+                        //Log.i("TAG", "listPrice is: $listPrice")
+                        //Log.i("TAG", "title is: $title")
+                        //Log.i("TAG", "author is: $authors"
+                        Log.i("TAG", "rating is $rating")
+
+                    } catch (e: Exception) {
+                        Log.e("TAG", "exception is: ${e.message}")
+                    }
+
+                    val dBook = DataBook(title, authors, listPrice, rating, imgurl)
+                    bookList.add(dBook)
+
+                }
+
+                recycleadapter = DashboardRecyclerAdapter(activity as Context, bookList)
+                recyclerdash.adapter = recycleadapter
+            },
+            {
+                Log.i("TAG", "VolleyError is : $it")
+            })
+
+
+        queue.add(stringRequest)
+
+    }
+
+
 }
 
 

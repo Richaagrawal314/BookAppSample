@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:layout_margin="5dp"
@@ -31,8 +32,10 @@
             <TextView
                 android:id="@+id/txtbookname"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="9dp"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:text="@string/just_a_list"
                 android:textColor="#000000"
                 android:textSize="22sp"
@@ -42,7 +45,7 @@
             <TextView
                 android:id="@+id/txtauthorname"
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/txtbookname"
                 android:layout_marginStart="9dp"
                 android:maxLines="3"
@@ -52,7 +55,7 @@
             <TextView
                 android:id="@+id/txtprice"
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/txtauthorname"
                 android:layout_marginStart="9dp"
                 android:text="@string/price"
@@ -69,8 +72,8 @@
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:layout_weight=".6"
-            android:text="@string/_4_5"
             android:textColor="#FFC107"
-            app:drawableLeftCompat="@drawable/ic_star_black_24dp" />
+            app:drawableLeftCompat="@drawable/ic_star_black_24dp"
+            tools:text="@string/rating" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -72,7 +72,7 @@
             android:layout_margin="10dp"
             android:layout_weight=".6"
             android:autoSizeTextType="uniform"
-            android:text="@string/_4_5"
+            android:text="@string/rating"
             android:textColor="#FFC107"
             android:textSize="15sp"
             app:drawableLeftCompat="@drawable/ic_star_black_24dp" />

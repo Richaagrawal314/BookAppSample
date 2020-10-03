@@ -2,6 +2,7 @@ package com.internshala.bookhun.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.internshala.bookhun.R
 import com.internshala.bookhun.activity.DescriptionActivity
 import com.internshala.bookhun.model.DataBook
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 class DashboardRecyclerAdapter(val context: Context, private val itemList: ArrayList<DataBook>) :
     RecyclerView.Adapter<DashboardRecyclerAdapter.DashboardViewHolder>() {
@@ -38,15 +41,26 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         val book = itemList[position]
-        holder.bookView.text = book.txtBookName
-        holder.authView.text = book.txtBookAuthor
-        holder.priceView.text = book.txtBookPrice
-        holder.ratingView.text = book.txtBookRating
-        holder.bookimage.setImageResource(book.imgBookImage)
+        holder.bookView.text = book.dcBookName
+        holder.authView.text = book.dcBookAuthor
+        holder.priceView.text = book.dcBookPrice
+        holder.ratingView.text = book.dcBookRating
+        Picasso.get()
+            .load(book.dcBookImage).placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(holder.bookimage, object : Callback {
+                override fun onSuccess() {
+                    Log.i("TAG", "on success callback")
+                }
+                override fun onError(e: Exception) {
+                    Log.e("TAG", "onError callback ${e.message}")
+                }
+            })
+       // holder.bookimage.setImageResource(book.dcBookImage)
 
         holder.bookView.setOnClickListener {
             val intent = Intent(context, DescriptionActivity::class.java)
-            intent.putExtra("bookName", book.txtBookName)
+            intent.putExtra("bookName", book.dcBookName)
             context.startActivity(intent)
         }
 
