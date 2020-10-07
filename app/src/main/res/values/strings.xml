@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookHUN</string>
+    <string name="app_name">BookHUB</string>
     <string name="dashboard">Dashboard</string>
     <string name="favourite">Favourite</string>
     <string name="mylibrary">My Library</string>
@@ -12,7 +12,9 @@
     <string name="dashboard_fragment">Dashboard fragment</string>
     <string name="favourite_fragment">favourite fragment</string>
     <string name="profile_fragment">profile fragment</string>
-    <string name="aboutapp_fragment">about app fragment</string>
+    <string name="aboutapp_fragment">This is a sample E-book App.
+    Here, you can search for books, mark them your favourite, add in your library, sometimes get a preview also.
+    Or select any book from the best selling section.</string>
     <string name="just_a_list">BookName</string>
     <string name="rating">_</string>
     <string name="name_of_author">Name of author</string>

@@ -19,7 +19,7 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
     RecyclerView.Adapter<DashboardRecyclerAdapter.DashboardViewHolder>() {
 
     class DashboardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val bookView: TextView = itemView.findViewById((R.id.txtbookname))
+        val booknameView: TextView = itemView.findViewById((R.id.txtbookname))
         val authView: TextView = itemView.findViewById((R.id.txtauthorname))
         val priceView: TextView = itemView.findViewById((R.id.txtprice))
         val ratingView: TextView = itemView.findViewById(R.id.txtbookrating)
@@ -41,7 +41,7 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         val book = itemList[position]
-        holder.bookView.text = book.dcBookName
+        holder.booknameView.text = book.dcBookName
         holder.authView.text = book.dcBookAuthor
         holder.priceView.text = book.dcBookPrice
         holder.ratingView.text = book.dcBookRating
@@ -58,7 +58,7 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
             })
        // holder.bookimage.setImageResource(book.dcBookImage)
 
-        holder.bookView.setOnClickListener {
+        holder.booknameView.setOnClickListener {
             val intent = Intent(context, DescriptionActivity::class.java)
             intent.putExtra("bookName", book.dcBookName)
             context.startActivity(intent)

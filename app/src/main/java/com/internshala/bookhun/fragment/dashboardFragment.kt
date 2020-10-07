@@ -28,7 +28,7 @@ class DashboardFragment : Fragment() {
     private lateinit var checkbtn: Button
     private lateinit var recycleadapter: DashboardRecyclerAdapter
     private lateinit var progressLayout: RelativeLayout
-    // private lateinit var progressBar: ProgressBar
+
 
 
     /*  private val bookInfoList = arrayListOf(
@@ -37,7 +37,7 @@ class DashboardFragment : Fragment() {
               "fgvgv", R.drawable.jellyfish
           ),
           DataBook(
-              "Lolita", "Vladmir something", "566",
+              "Lolita", "Vladimir Nabokov", "566",
               "212", R.drawable.koala
           ),
       and 10 more {Initially this data was passed to adapter and displayed.}
