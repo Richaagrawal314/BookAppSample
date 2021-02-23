@@ -1,6 +1,5 @@
 package com.internshala.bookhun.fragment
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.RelativeLayout
+import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,75 +19,57 @@ import com.android.volley.toolbox.Volley
 import com.internshala.bookhun.R
 import com.internshala.bookhun.adapter.DashboardRecyclerAdapter
 import com.internshala.bookhun.model.DataBook
-import com.internshala.bookhun.util.ConnectionManager
 import org.json.JSONObject
 
-class DashboardFragment : Fragment() {
-    private lateinit var recyclerdash: RecyclerView
+/**
+ * A simple [Fragment] subclass.
+ */
+class SearchFragment : Fragment() {
+
+    private val TAG = "MainActivity"
+    private lateinit var mbookinput: EditText
+    private lateinit var button: Button
+    private lateinit var recyclerSearch: RecyclerView
     private lateinit var layoutlinear: RecyclerView.LayoutManager
-    private lateinit var checkbtn: Button
     private lateinit var recycleadapter: DashboardRecyclerAdapter
-    private lateinit var progressLayout: RelativeLayout
-
-
-    /*  private val bookInfoList = arrayListOf(
-          DataBook(
-              "A Thousand Splendid Dreams", "Khaled Hosseini", "ffdvf",
-              "fgvgv", R.drawable.jellyfish
-          ),
-          DataBook(
-              "Lolita", "Vladimir Nabokov", "566",
-              "212", R.drawable.koala
-          ),
-      and 10 more {Initially this data was passed to adapter and displayed.}
-      )*/
-
+    private lateinit var progressLayout: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        mbookinput = view.findViewById(R.id.txtBookInput)
+        button = view.findViewById(R.id.btnfetch)
+        recyclerSearch = view.findViewById((R.id.recycleSearch))
+        progressLayout = view.findViewById(R.id.searchProgressBar)
+        progressLayout.visibility = View.GONE
 
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        recyclerdash = view.findViewById((R.id.recyclerdash))
-        checkbtn = view.findViewById(R.id.btncheckinternet)
-        progressLayout = view.findViewById(R.id.dasProgressLayout)
-        progressLayout.visibility = View.VISIBLE
-
-
-        checkbtn.setOnClickListener {
-            if (ConnectionManager().checkConnectivity(activity as Context)) {
-                val dialog = AlertDialog.Builder(activity as Context)
-                dialog.setTitle("Success")
-                dialog.setMessage("Internet Connection Found")
-                dialog.setPositiveButton("Ok") { _, _ -> }
-                dialog.setNegativeButton("Cancel") { _, _ -> }
-                dialog.create()
-                dialog.show()
-            } else {
-                val dialog = AlertDialog.Builder(activity as Context)
-                dialog.setTitle("Success")
-                dialog.setMessage("Internet Connection Not Found")
-                dialog.setPositiveButton("Ok") { _, _ -> }
-                dialog.setNegativeButton("Cancel") { _, _ -> }
-                dialog.create()
-                dialog.show()
-            }
-        }
-
-        layoutlinear = LinearLayoutManager(activity)
-        recyclerdash.layoutManager = layoutlinear
-        getLatestBooks()
         return view
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        layoutlinear = LinearLayoutManager(activity)
+        recyclerSearch.layoutManager = layoutlinear
+
+        button.setOnClickListener {
+            progressLayout.visibility = View.VISIBLE
+            getLatestBooks()
+        }
+
+    }
+
 
     private fun getLatestBooks() {
         val bookList = arrayListOf<DataBook>()
         //set queryString to whatever type books you want on your Dashboard
-        val queryString = "best sellers books recent"
+        val queryString = mbookinput.text.toString()
         val queue: RequestQueue = Volley.newRequestQueue(context)
         val url =
-            "https://www.googleapis.com/books/v1/volumes?q={$queryString}&maxResults=40&printType=books"
+            "https://www.googleapis.com/books/v1/volumes?q={$queryString}&maxResults=10&printType=books"
         var title = ""
         var authors = ""
         var imgurl = ""
@@ -128,6 +110,8 @@ class DashboardFragment : Fragment() {
 
                         imgurl = volumeInfo.getJSONObject("imageLinks")
                             .getString("thumbnail")
+                        if(imgurl.isEmpty())
+                        imgurl="xxx"
                         //Log.i("TAG", "listPrice is: $listPrice")
                         //Log.i("TAG", "title is: $title")
                         //Log.i("TAG", "author is: $authors"
@@ -143,7 +127,7 @@ class DashboardFragment : Fragment() {
                 }
 
                 recycleadapter = DashboardRecyclerAdapter(activity as Context, bookList)
-                recyclerdash.adapter = recycleadapter
+                recyclerSearch.adapter = recycleadapter
             },
             {
                 Log.i("TAG", "VolleyError is : $it")
@@ -154,7 +138,4 @@ class DashboardFragment : Fragment() {
 
     }
 
-
 }
-
-

@@ -53,12 +53,12 @@ class FavFragment : Fragment() {
         return view
     }
 
-}
 
-class RetrieveFav(val context: Context) : AsyncTask<Void, Void, List<BookEntity>>() {
-    override fun doInBackground(vararg params: Void?): List<BookEntity> {
-        val db = Room.databaseBuilder(context, BDatabase::class.java, "books-db")
-            .build()
-        return db.bookDao().getAllBooks()
+    class RetrieveFav(val context: Context) : AsyncTask<Void, Void, List<BookEntity>>() {
+        override fun doInBackground(vararg params: Void?): List<BookEntity> {
+            val db = Room.databaseBuilder(context, BDatabase::class.java, "books-db")
+                .build()
+            return db.bookDao().getAllBooks()
+        }
     }
 }

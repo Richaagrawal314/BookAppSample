@@ -8,6 +8,7 @@
     android:background="#ffffff">
 
     <LinearLayout
+        android:id="@+id/detailCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -20,50 +21,49 @@
             android:layout_weight="1.1"
             android:contentDescription="@string/book_image"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_book" />
+            android:src="@drawable/book_icon" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3.3"
-            android:padding="8dp">
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:paddingStart="9dp"
+            android:paddingEnd="1dp">
 
 
             <TextView
                 android:id="@+id/txtbookname"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="9dp"
+                android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:singleLine="true"
-                android:text="@string/just_a_list"
-                android:textColor="#000000"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:maxLines="2"
+                android:text="@string/bookname"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="something really really long and long" />
 
 
             <TextView
                 android:id="@+id/txtauthorname"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/txtbookname"
-                android:layout_marginStart="9dp"
-                android:maxLines="3"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@string/name_of_author"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                tools:text="something really really long and long" />
 
             <TextView
                 android:id="@+id/txtprice"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/txtauthorname"
-                android:layout_marginStart="9dp"
+                android:layout_height="wrap_content"
                 android:text="@string/price"
-                android:textColor="#4CAF50"
+                android:textColor="@color/price_green"
                 android:textSize="15sp" />
 
-
-        </RelativeLayout>
+        </LinearLayout>
 
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:layout_weight=".6"
-            android:textColor="#FFC107"
+            android:textColor="@color/star_yellow"
             app:drawableLeftCompat="@drawable/ic_star_black_24dp"
             tools:text="@string/rating" />
     </LinearLayout>

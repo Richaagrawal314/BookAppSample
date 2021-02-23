@@ -1,13 +1,17 @@
 package com.internshala.bookhun.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.internshala.bookhun.R
+import com.internshala.bookhun.activity.DescriptionActivity
 import com.internshala.bookhun.database.BookEntity
 import com.squareup.picasso.Picasso
 
@@ -25,9 +29,14 @@ class FavouriteRecyclerAdapter(val context: Context, private val bookList: List<
 
         holder.txtBookName.text = book.bookNameEnCl
         holder.txtBookAuthor.text = book.bookAuthorEnCl
-        holder.txtBookPriceHolder.text = book.book_id
+      //  holder.txtBookPriceHolder.text = book.book_id
         Picasso.get().load(book.bookImageEnCl).into(holder.imgFavImage)
 
+        holder.favouriteCard.setOnClickListener {
+            val intent = Intent(context, DescriptionActivity::class.java)
+            intent.putExtra("bookName", book.bookNameEnCl)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -37,9 +46,9 @@ class FavouriteRecyclerAdapter(val context: Context, private val bookList: List<
     class FavouriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtBookName: TextView = view.findViewById(R.id.txtFavTitle)
         val txtBookAuthor: TextView = view.findViewById(R.id.txtFavAuthor)
-        val txtBookPriceHolder: TextView = view.findViewById(R.id.txtFavPrice)
+       // val txtBookPriceHolder: TextView = view.findViewById(R.id.txtFavPrice)
       //  val txtBookRating: TextView = view.findViewById(R.id.txtFavRating)
         val imgFavImage: ImageView = view.findViewById(R.id.imgFavBook)
-      //  val linearLayout: LinearLayout = view.findViewById(R.id.llFavLayout)
+       val favouriteCard: LinearLayout = view.findViewById(R.id.llFavLayout)
     }
 }

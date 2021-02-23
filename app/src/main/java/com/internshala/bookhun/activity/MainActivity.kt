@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,12 +17,11 @@ import com.google.android.material.navigation.NavigationView
 import com.internshala.bookhun.R
 import com.internshala.bookhun.fragment.DashboardFragment
 import com.internshala.bookhun.fragment.FavFragment
+import com.internshala.bookhun.fragment.SearchFragment
 import com.internshala.bookhun.fragment.aboutappfragment
-import com.internshala.bookhun.fragment.profileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dr: DrawerLayout
-    private lateinit var tb: Toolbar
     private lateinit var fl: FrameLayout
     private lateinit var cl: CoordinatorLayout
     private lateinit var nv: NavigationView
@@ -35,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         dr = findViewById(R.id.drawerlayout)
-        tb = findViewById(R.id.toolbar)
         fl = findViewById(R.id.framelayout)
         cl = findViewById(R.id.coordinatorlayout)
         nv = findViewById(R.id.navigationview)
@@ -84,11 +81,11 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.framelayout,
-                            profileFragment()
+                            SearchFragment()
                         )
                         //.addToBackStack("profile")
                         .commit()
-                    supportActionBar?.title = "My Library"
+                    supportActionBar?.title = "Search"
 
                     dr.closeDrawers()
                 }
@@ -122,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setuptoolbar() {
-        setSupportActionBar(tb)
+
         supportActionBar?.title = "title bar"
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -148,32 +145,32 @@ class MainActivity : AppCompatActivity() {
         nv.setCheckedItem(R.id.dashboard)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater=menuInflater
-        inflater.inflate(R.menu.search_menu,menu)
-        val manager= getSystemService(Context.SEARCH_SERVICE)as SearchManager
-        val searchItem=menu?.findItem(R.id.search_icon)
+   /* override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_menu, menu)
+        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu?.findItem(R.id.search_icon)
 
         //not yet functional
         val searchView = searchItem?.actionView as SearchView
 
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
 
-        searchView.setOnQueryTextListener( object: SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
-                searchView.setQuery("",false)
+                searchView.setQuery("", false)
                 searchItem.collapseActionView()
-                Toast.makeText(this@MainActivity,"$query",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "$query", Toast.LENGTH_SHORT).show()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-               // Toast.makeText(this@MainActivity,"$newText",Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this@MainActivity,"$newText",Toast.LENGTH_SHORT).show()
                 return false
             }
         })
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 }
 
