@@ -2,7 +2,7 @@
     <string name="app_name">BookHUB</string>
     <string name="dashboard">Dashboard</string>
     <string name="favourite">Favourite</string>
-    <string name="mylibrary">My Library</string>
+    <string name="searchAnything">Search</string>
     <string name="aboutapp">About App</string>
     <string name="navigation_bar">Navigation Bar</string>
     <string name="open_drawer">open drawer</string>
@@ -24,9 +24,14 @@
     <string name="add_to_favourites">Add To Favourites</string>
     <string name="sample_text">Sample Text</string>
     <string name="bookname">BookName</string>
-    <string name="authorname">Authorname</string>
+    <string name="authorname">AuthorName</string>
     <string name="book_image">BookImage</string>
     <string name="search">Search</string>
     <string name="add_to_library">Add to Library</string>
     <string name="bookcover">BookCover</string>
+    <string name="search_book_text">What do you want to find?</string>
+    <string name="search_hint">Enter anything</string>
+    <string name="fetch">Fetch</string>
+    <string name="description">Description</string>
+    <string name="delete">delete</string>
 </resources>

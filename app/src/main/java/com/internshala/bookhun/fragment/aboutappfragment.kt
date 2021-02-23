@@ -17,7 +17,7 @@ class aboutappfragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_aboutappfragment, container, false)
+        return inflater.inflate(R.layout.fragment_aboutapp, container, false)
     }
 
 }

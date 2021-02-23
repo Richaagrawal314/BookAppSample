@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <ImageView
+                android:id="@+id/imgDesc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1.7"
+                android:contentDescription="@string/bookcover"
+                android:padding="5dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.3">
+
+                <TextView
+                    android:id="@+id/txtdescbookname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:padding="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    tools:text="something really really really long that goes beyond and if doesn't fit space." />
+
+                <TextView
+                    android:id="@+id/txtdescauthorname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtdescbookname"
+                    android:layout_marginStart="10dp"
+                    android:padding="5dp"
+                    android:textColor="@color/shade_lighterthan_black"
+                    android:textSize="16sp"
+                    tools:text="something really really really long that goes beyond" />
+
+                <TextView
+                    android:id="@+id/txtdescbookprice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtdescauthorname"
+                    android:layout_marginStart="10dp"
+                    android:padding="5dp"
+                    android:textSize="14sp"
+                    tools:text="@string/price" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDescAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llContent"
+            android:text="@string/about_book"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDescAbout"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/txtDescDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingBottom="5dp"
+                android:text="@string/sample_text"
+                android:textColor="#4E4A4A"
+                android:textSize="16sp" />
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btnFavouriteDescription"
+        android:layout_width="match_parent"
+        android:textAllCaps="false"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/add_to_favourites"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true" />
+
+   <!-- <Button
+        android:id="@+id/btnAddToLibrary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:layout_toStartOf="@id/view"
+        android:background="@color/colorPrimary"
+        android:text="@string/add_to_library"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />-->
+</RelativeLayout>
+

@@ -38,7 +38,7 @@ class DescriptionActivity
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_description_activity)
+        setContentView(R.layout.activity_description)
         txtBookName = findViewById(R.id.txtdescbookname)
         txtBookauthor = findViewById(R.id.txtdescauthorname)
         txtBookPrice = findViewById(R.id.txtdescbookprice)

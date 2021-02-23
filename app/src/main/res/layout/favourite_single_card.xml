@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="2dp"
     android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/llFavLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="11">
@@ -19,33 +19,39 @@
             android:id="@+id/imgFavBook"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4.8"
+            android:layout_weight="6.3"
             android:background="#f5f5f5"
             android:contentDescription="@string/book_image"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/book_icon" />
+
 
         <TextView
             android:id="@+id/txtFavTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="@string/sample_text"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="something really really long and beyond that it goes out and about" />
 
         <TextView
             android:id="@+id/txtFavAuthor"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:ellipsize="end"
             android:gravity="center"
             android:text="@string/sample_text"
-            android:textColor="#5F5959"
-            android:textSize="18sp" />
+            android:textColor="@color/price_green"
+            android:textSize="16sp" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/txtFavPrice"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -54,7 +60,7 @@
             android:text="@string/price"
             android:textColor="#4CAF50"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
         <TextView
             android:id="@+id/txtFavRating"
@@ -62,11 +68,11 @@
             android:layout_height="0dp"
             android:layout_weight="1.7"
             android:gravity="center"
-            tools:text="@string/rating"
             android:textColor="#FFC107"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_star_black_24dp" />
+            app:drawableStartCompat="@drawable/ic_star_black_24dp"
+            tools:text="@string/rating" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
