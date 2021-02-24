@@ -15,8 +15,11 @@ To be modified
 -Adding preview for books.
 
 Screenshots--
-![SearchFragment](https://user-images.githubusercontent.com/45590326/108967694-d4fd8d00-76a5-11eb-916e-5390c8cf51e5.jpeg)
-![FavouriteFragment](https://user-images.githubusercontent.com/45590326/108967713-da5ad780-76a5-11eb-8e69-26014fd225ac.jpeg)
-![Dashboard](https://user-images.githubusercontent.com/45590326/108967727-dd55c800-76a5-11eb-97b8-5c91af636a96.jpeg)
-![DescriptionActivity](https://user-images.githubusercontent.com/45590326/108967733-dfb82200-76a5-11eb-8c2c-723bf9cfabf1.jpeg)
-![NavigationBar](https://user-images.githubusercontent.com/45590326/108967743-e2b31280-76a5-11eb-91b9-38bd7676b3ff.jpeg)
+
+
+<img align="left" src="https://user-images.githubusercontent.com/45590326/108967727-dd55c800-76a5-11eb-97b8-5c91af636a96.jpeg" width="200">
+<img align="left" src="https://user-images.githubusercontent.com/45590326/108967733-dfb82200-76a5-11eb-8c2c-723bf9cfabf1.jpeg" width="200"> 
+<img align="left" src="https://user-images.githubusercontent.com/45590326/108967694-d4fd8d00-76a5-11eb-916e-5390c8cf51e5.jpeg" width="200"> 
+<img align="left" src="https://user-images.githubusercontent.com/45590326/108967713-da5ad780-76a5-11eb-8e69-26014fd225ac.jpeg" width="200"> 
+<img align="left" src="https://user-images.githubusercontent.com/45590326/108967743-e2b31280-76a5-11eb-91b9-38bd7676b3ff.jpeg" width="200"> 
+
