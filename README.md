@@ -2,14 +2,14 @@
 This is a Kotlin based Sample E-book App(My first noteworthy app).
 The details are fetched from google books API. 
 Initially the data for homepage(here, Dashboard) was static but now it is fechted from google books API.
-Uses Volley for Internet Requests, Room for Database for a fragment section.
+Uses Volley for Internet Requests, Room for Database for a fragment(Favoutite) section.
 Right Now it is pretty basic but I'm working on adding features. 
 
 Features
 -Dashboard with some list of books.
 -Description activity with description of the book.
 -Favourite fragment with books marked as favourite by the user.
+-Search Fragment for searching books and their details.
 
 To be modified
--Adding books to "My Library" fragment
--Making searchView functional.
+-Adding preview for books.
